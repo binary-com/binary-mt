@@ -18482,6 +18482,7 @@ var BinarySocket = new BinarySocketClass();
                         });
                     });
                 }
+                displayTab();
             }
         }
     };
