@@ -18150,7 +18150,7 @@ var BinarySocket = new BinarySocketClass();
             'vanuatu'  : 'financial',
             'costarica': 'volatility'
         };
-        return group ? (typeMap[group.split('\\')[1]] || '') : '';
+        return group ? (typeMap[group.replace(/(binary_|_cent)/, '').split('\\')[1]] || '') : '';
     };
 
     var validateRequired = function(value) {
@@ -18482,6 +18482,7 @@ var BinarySocket = new BinarySocketClass();
                         });
                     });
                 }
+                displayTab();
             }
         }
     };
@@ -18505,7 +18506,7 @@ var BinarySocket = new BinarySocketClass();
             accType = 'gaming';
         }
         if(formValidate()) {
-            MetaTraderData.requestSend({
+            var req = {
                 'mt5_new_account' : 1,
                 'account_type'    : accType,
                 'email'           : TUser.get().email,
@@ -18513,7 +18514,11 @@ var BinarySocket = new BinarySocketClass();
                 'mainPassword'    : $form.find('.txtMainPass').val(),
                 'investPassword'  : $form.find('.txtInvestPass').val(),
                 'leverage'        : '100' // $form.find('.ddlLeverage').val()
-            });
+            };
+            if (accType === 'financial') {
+                req.mt5_account_type = 'cent';
+            }
+            MetaTraderData.requestSend(req);
         }
     };
 
@@ -18598,7 +18603,7 @@ var BinarySocket = new BinarySocketClass();
                         if(loginInfo.real) hasRealBinaryAccount = true;
                     });
 
-                    findInSection(accType, '.msg-account').html(hasRealBinaryAccount ? 
+                    findInSection(accType, '.msg-account').html(hasRealBinaryAccount ?
                         text.localize('To create a ' + accountDisplayName[accType] + ' Account for MT5, please switch to your [_1] Real Account.', ['Binary.com']) :
                         text.localize('To create a ' + accountDisplayName[accType] + ' Account for MT5, please <a href="[_1]"> upgrade to [_2] Real Account</a>.', [page.url.url_for('new_account/realws', '', true), 'Binary.com'])
                     ).removeClass(hiddenClass);
