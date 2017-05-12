@@ -18643,7 +18643,7 @@ var BinarySocket = new BinarySocketClass();
         var lc = response.landing_company;
         hasFinancialCompany = lc.hasOwnProperty('mt_financial_company') && lc.mt_financial_company.shortcode === 'vanuatu';
         hasGamingCompany    = lc.hasOwnProperty('mt_gaming_company')    && lc.mt_gaming_company.shortcode    === 'costarica';
-        if (lc.hasOwnProperty('financial_company') && lc.financial_company.shortcode === 'costarica' && (hasFinancialCompany || hasGamingCompany)) {
+        if (hasFinancialCompany || hasGamingCompany) {
             initOk();
         } else {
             notEligible();
