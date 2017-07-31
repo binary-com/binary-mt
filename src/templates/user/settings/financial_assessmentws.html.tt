@@ -186,6 +186,38 @@
                     </div>
                     <div class="gr-padding-10 gr-row clear">
                         <div class="gr-4 form_label">
+                            <label for="income_source">[% l('Income Source') %]</label>
+                        </div>
+                        <div class="gr-8">
+                            <select id="income_source" name="income_source">
+                                <option value="">[% l('Please select') %]</option>
+                                <option value="Salaried Employee">[% l('Salaried Employee') %]</option>
+                                <option value="Self-Employed">[% l('Self-Employed') %]</option>
+                                <option value="Investments &amp; Dividends">[% l('Investments &amp; Dividends') %]</option>
+                                <option value="Pension">[% l('Pension') %]</option>
+                                <option value="Other">[% l('Other') %]</option>
+                            </select>
+                            <p class="errorfield" id="errorincome_source"></p>
+                        </div>
+                    </div>
+                    <div class="gr-padding-10 gr-row clear">
+                        <div class="gr-4 form_label">
+                            <label for="income_source">[% l('Employment Status') %]</label>
+                        </div>
+                        <div class="gr-8">
+                            <select id="employment_status" name="employment_status">
+                                <option value="">[% l('Please select') %]</option>
+                                <option value="Employed">[% l("Employed") %]</option>
+                                <option value="Pensioner">[% l("Pensioner") %]</option>
+                                <option value="Self-Employed">[% l("Self-Employed") %]</option>
+                                <option value="Student">[% l("Student") %]</option>
+                                <option value="Unemployed">[% l("Unemployed") %]</option>
+                            </select>
+                            <p class="errorfield" id="erroremployment_status"></p>
+                        </div>
+                    </div>
+                    <div class="gr-padding-10 gr-row clear">
+                        <div class="gr-4 form_label">
                             <label for="employment_industry">[% l('Industry of Employment') %]</label>
                         </div>
                         <div class="gr-8">
@@ -227,6 +259,25 @@
                     </div>
                     <div class="gr-padding-10 gr-row clear">
                         <div class="gr-4 form_label">
+                            <label for="source_of_wealth">[% l('Source of Wealth') %]</label>
+                        </div>
+                        <div class="gr-8">
+                            <select id="source_of_wealth" name="source_of_wealth">
+                                <option value="">[% l('Please select') %]</option>
+                                <option value="Accumulation of Income/Savings">[% l("Accumulation of Income/Savings") %]</option>
+                                <option value="Cash Business">[% l("Cash Business") %]</option>
+                                <option value="Company Ownership">[% l("Company Ownership") %]</option>
+                                <option value="Divorce Settlement">[% l("Divorce Settlement") %]</option>
+                                <option value="Inheritance">[% l("Inheritance") %]</option>
+                                <option value="Investment Income">[% l("Investment Income") %]</option>
+                                <option value="Sale of Property">[% l("Sale of Property") %]</option>
+                                <option value="Other">[% l("Other") %]</option>
+                            </select>
+                            <p class="errorfield" id="errorsource_of_wealth"></p>
+                        </div>
+                    </div>
+                    <div class="gr-padding-10 gr-row clear">
+                        <div class="gr-4 form_label">
                             <label for="education_level">[% l('Level of Education') %]</label>
                         </div>
                         <div class="gr-8">
@@ -241,22 +292,6 @@
                     </div>
                     <div class="gr-padding-10 gr-row clear">
                         <div class="gr-4 form_label">
-                            <label for="income_source">[% l('Income Source') %]</label>
-                        </div>
-                        <div class="gr-8">
-                            <select id="income_source" name="income_source">
-                                <option value="">[% l('Please select') %]</option>
-                                <option value="Salaried Employee">[% l('Salaried Employee') %]</option>
-                                <option value="Self-Employed">[% l('Self-Employed') %]</option>
-                                <option value="Investments &amp; Dividends">[% l('Investments &amp; Dividends') %]</option>
-                                <option value="Pension">[% l('Pension') %]</option>
-                                <option value="Other">[% l('Other') %]</option>
-                            </select>
-                            <p class="errorfield" id="errorincome_source"></p>
-                        </div>
-                    </div>
-                    <div class="gr-padding-10 gr-row clear">
-                        <div class="gr-4 form_label">
                             <label for="net_income">[% l('Net Annual Income') %]</label>
                         </div>
                         <div class="gr-8">
@@ -266,7 +301,7 @@
                                 <option value="&#36;25,000 - &#36;50,000">[% l('&#36;25,000 - &#36;50,000') %]</option>
                                 <option value="&#36;50,001 - &#36;100,000">[% l('&#36;50,001 - &#36;100,000') %]</option>
                                 <option value="&#36;100,001 - &#36;500,000">[% l('&#36;100,001 - &#36;500,000') %]</option>
-                                <option value="Over &#36;500,000">[% l('Over &#36;500,001') %]</option>
+                                <option value="Over &#36;500,000">[% l('Over &#36;500,000') %]</option>
                             </select>
                             <p class="errorfield" id="errornet_income"></p>
                         </div>
@@ -285,6 +320,22 @@
                                 <option value="Over &#36;1,000,000">[% l('Over &#36;1,000,000') %]</option>
                             </select>
                             <p class="errorfield" id="errorestimated_worth"></p>
+                        </div>
+                    </div>
+                    <div class="gr-padding-10 gr-row clear">
+                        <div class="gr-4 form_label">
+                            <label for="account_turnover">[% l('Anticipated Account Turnover') %]</label>
+                        </div>
+                        <div class="gr-8">
+                            <select id="account_turnover" name="account_turnover">
+                                <option value="">[% l('Please select') %]</option>
+                                <option value="Less than \$25,000">[% l("Less than \$25,000") %]</option>
+                                <option value="\$25,000 - \$50,000">[% l("\$25,000 - \$50,000") %]</option>
+                                <option value="\$50,001 - \$100,000">[% l("\$50,001 - \$100,000") %]</option>
+                                <option value="\$100,001 - \$500,000">[% l("\$100,001 - \$500,000") %]</option>
+                                <option value="Over \$500,000">[% l("Over \$500,000") %]</option>
+                            </select>
+                            <p class="errorfield" id="erroraccount_turnover"></p>
                         </div>
                     </div>
                 </fieldset>
