@@ -119,11 +119,12 @@ var MetaTraderUI = (function() {
                     $form.find('.binary-login').text(page.client.loginid);
                     $form.find('.mt-login').text(mt5Accounts[accType].login);
                     $form.find('.txtAmount').unbind('keypress').keypress(onlyNumericOnKeypress);
-                    $form.find('button').unbind('click').click(function(e) {
+                    $form.off('submit').on('submit', function(e) {
                         e.preventDefault();
                         e.stopPropagation();
-                        if (!$(this).attr('disabled')) {
-                            $(this).addClass('button-disabled').attr('disabled', 'disabled');
+                        var $btn = $form.find('button');
+                        if (!$btn.attr('disabled')) {
+                            disableButton($btn);
                             if(/deposit/.test(formClass)) {
                                 depositToMTAccount(accType);
                             } else {
@@ -290,9 +291,10 @@ var MetaTraderUI = (function() {
         }
 
         if($form && /new/.test($form.attr('class'))) {
-            $form.find('button').unbind('click').click(function(e) {
+            $form.off('submit').on('submit', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
+                disableButton($form.find('button'));
                 createNewAccount(accType);
             });
         }
@@ -384,6 +386,7 @@ var MetaTraderUI = (function() {
 
     var responseNewAccount = function(response) {
         if(response.hasOwnProperty('error')) {
+            enableButton($form.find('button'));
             return showFormMessage(response.error.message, false);
         }
 
@@ -570,10 +573,6 @@ var MetaTraderUI = (function() {
 
     var showAccountMessage = function(accType, message) {
         findInSection(accType, '.msg-account').html(message).removeClass(hiddenClass);
-    };
-
-    var enableButton = function($btn) {
-        $btn.removeClass('button-disabled').removeAttr('disabled');
     };
 
     var responseMT5APISuspended = function(message) {
