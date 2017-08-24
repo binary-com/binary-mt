@@ -614,14 +614,14 @@ Contents.prototype = {
                 $('.by_client_type.client_real').removeClass('invisible');
                 $('.by_client_type.client_real').show();
 
-                $('#topbar').addClass('primary-color-dark');
+                $('#topbar').addClass('primary-bg-color-dark');
                 $('#topbar').removeClass('secondary-bg-color');
             } else {
                 $('.by_client_type.client_virtual').removeClass('invisible');
                 $('.by_client_type.client_virtual').show();
 
                 $('#topbar').addClass('secondary-bg-color');
-                $('#topbar').removeClass('primary-color-dark');
+                $('#topbar').removeClass('primary-bg-color-dark');
             }
         } else {
             $('#btn_login').unbind('click').click(function(e){e.preventDefault(); Login.redirect_to_login();});
@@ -630,7 +630,7 @@ Contents.prototype = {
             $('.by_client_type.client_logged_out').show();
 
             $('#topbar').removeClass('secondary-bg-color');
-            $('#topbar').addClass('primary-color-dark');
+            $('#topbar').addClass('primary-bg-color-dark');
         }
     },
     activate_by_login: function() {
