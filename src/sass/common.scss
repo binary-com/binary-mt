@@ -248,3 +248,13 @@ img.small {
 div ul li.no-bullet {
     list-style-image: none;
 }
+
+.button {
+    &[disabled] {
+        cursor: default;
+    }
+    .barspinner.white {
+        height: 13px;
+        margin: 3px auto;
+    }
+}

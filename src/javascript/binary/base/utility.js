@@ -3,8 +3,8 @@
 // Parameters:
 // 1) container - a jQuery object
 //////////////////////////////////////////////////////////////////
-function showLoadingImage(container) {
-    container.empty().append('<div class="barspinner dark"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div>');
+function showLoadingImage(container, theme) {
+    container.empty().append('<div class="barspinner ' + (theme || 'dark') + '"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div>');
 }
 
 function showLocalTimeOnHover(s) {
@@ -52,6 +52,21 @@ function parseLoginIDList(string) {
             non_financial: /^MLT/.test(id),
         };
     });
+}
+
+function disableButton($btn) {
+    if ($btn.length && !$btn.find('.barspinner').length) {
+        $btn.attr('disabled', 'disabled');
+        var $btn_text = $('<span/>', { text: $btn.text(), class: 'invisible' });
+        showLoadingImage($btn, 'white');
+        $btn.append($btn_text);
+    }
+}
+
+function enableButton($btn) {
+    if ($btn.length && $btn.find('.barspinner').length) {
+        $btn.removeAttr('disabled').html($btn.find('span').text());
+    }
 }
 
 //used temporarily for mocha test
