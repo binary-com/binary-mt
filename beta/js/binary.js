@@ -16651,14 +16651,14 @@ Contents.prototype = {
                 $('.by_client_type.client_real').removeClass('invisible');
                 $('.by_client_type.client_real').show();
 
-                $('#topbar').addClass('primary-color-dark');
+                $('#topbar').addClass('primary-bg-color-dark');
                 $('#topbar').removeClass('secondary-bg-color');
             } else {
                 $('.by_client_type.client_virtual').removeClass('invisible');
                 $('.by_client_type.client_virtual').show();
 
                 $('#topbar').addClass('secondary-bg-color');
-                $('#topbar').removeClass('primary-color-dark');
+                $('#topbar').removeClass('primary-bg-color-dark');
             }
         } else {
             $('#btn_login').unbind('click').click(function(e){e.preventDefault(); Login.redirect_to_login();});
@@ -16667,7 +16667,7 @@ Contents.prototype = {
             $('.by_client_type.client_logged_out').show();
 
             $('#topbar').removeClass('secondary-bg-color');
-            $('#topbar').addClass('primary-color-dark');
+            $('#topbar').addClass('primary-bg-color-dark');
         }
     },
     activate_by_login: function() {
@@ -17151,8 +17151,8 @@ if (typeof module !== 'undefined') {
 // Parameters:
 // 1) container - a jQuery object
 //////////////////////////////////////////////////////////////////
-function showLoadingImage(container) {
-    container.empty().append('<div class="barspinner dark"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div>');
+function showLoadingImage(container, theme) {
+    container.empty().append('<div class="barspinner ' + (theme || 'dark') + '"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div>');
 }
 
 function showLocalTimeOnHover(s) {
@@ -17200,6 +17200,21 @@ function parseLoginIDList(string) {
             non_financial: /^MLT/.test(id),
         };
     });
+}
+
+function disableButton($btn) {
+    if ($btn.length && !$btn.find('.barspinner').length) {
+        $btn.attr('disabled', 'disabled');
+        var $btn_text = $('<span/>', { text: $btn.text(), class: 'invisible' });
+        showLoadingImage($btn, 'white');
+        $btn.append($btn_text);
+    }
+}
+
+function enableButton($btn) {
+    if ($btn.length && $btn.find('.barspinner').length) {
+        $btn.removeAttr('disabled').html($btn.find('span').text());
+    }
 }
 
 //used temporarily for mocha test
@@ -18453,11 +18468,12 @@ var BinarySocket = new BinarySocketClass();
                     $form.find('.binary-login').text(page.client.loginid);
                     $form.find('.mt-login').text(mt5Accounts[accType].login);
                     $form.find('.txtAmount').unbind('keypress').keypress(onlyNumericOnKeypress);
-                    $form.find('button').unbind('click').click(function(e) {
+                    $form.off('submit').on('submit', function(e) {
                         e.preventDefault();
                         e.stopPropagation();
-                        if (!$(this).attr('disabled')) {
-                            $(this).addClass('button-disabled').attr('disabled', 'disabled');
+                        var $btn = $form.find('button');
+                        if (!$btn.attr('disabled')) {
+                            disableButton($btn);
                             if(/deposit/.test(formClass)) {
                                 depositToMTAccount(accType);
                             } else {
@@ -18624,9 +18640,10 @@ var BinarySocket = new BinarySocketClass();
         }
 
         if($form && /new/.test($form.attr('class'))) {
-            $form.find('button').unbind('click').click(function(e) {
+            $form.off('submit').on('submit', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
+                disableButton($form.find('button'));
                 createNewAccount(accType);
             });
         }
@@ -18718,6 +18735,7 @@ var BinarySocket = new BinarySocketClass();
 
     var responseNewAccount = function(response) {
         if(response.hasOwnProperty('error')) {
+            enableButton($form.find('button'));
             return showFormMessage(response.error.message, false);
         }
 
@@ -18904,10 +18922,6 @@ var BinarySocket = new BinarySocketClass();
 
     var showAccountMessage = function(accType, message) {
         findInSection(accType, '.msg-account').html(message).removeClass(hiddenClass);
-    };
-
-    var enableButton = function($btn) {
-        $btn.removeClass('button-disabled').removeAttr('disabled');
     };
 
     var responseMT5APISuspended = function(message) {
