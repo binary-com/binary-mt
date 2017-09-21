@@ -79,7 +79,7 @@ var MetaTraderUI = (function() {
     };
 
     var notEligible = function() {
-        showPageError(Content.localize().textFeatureUnavailable);
+        showPageError('Sorry, Metatrader facilities are not currently available in your country of residence.');
         $('mt-container').addClass(hiddenClass);
     };
 
