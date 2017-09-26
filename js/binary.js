@@ -17446,7 +17446,6 @@ function map_code_to_language(code) {
             textMessageJustAllowed: text.localize('Only [_1] are allowed.'), // [_1] should be replaced by values including: letters, numbers, space, period, ...
             textMessageValid: text.localize('Please submit a valid [_1].'), // [_1] should be replaced by values such as email address
             textMessageMinRequired: text.localize('Minimum of [_1] characters required.'),
-            textFeatureUnavailable: text.localize('Sorry, this feature is not available.'),
             textMessagePasswordScore: text.localize( 'Password score is: [_1]. Passing score is: 20.'),
             textPasswordsNotMatching: text.localize('The two passwords that you entered do not match.'),
             textShouldNotLessThan: text.localize('Please enter a number greater or equal to [_1].'),
@@ -18428,7 +18427,7 @@ var BinarySocket = new BinarySocketClass();
     };
 
     var notEligible = function() {
-        showPageError(Content.localize().textFeatureUnavailable);
+        showPageError('Sorry, Metatrader facilities are not currently available in your country of residence.');
         $('mt-container').addClass(hiddenClass);
     };
 
