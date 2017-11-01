@@ -16180,6 +16180,7 @@ Client.prototype = {
     },
     response_authorize: function(response) {
         page.client.set_storage_value('session_start', parseInt(moment().valueOf() / 1000));
+        page.client.set_storage_value('currency', response.authorize.currency);
         TUser.set(response.authorize);
         if(!Cookies.get('email')) this.set_cookie('email', response.authorize.email);
         this.set_storage_value('is_virtual', TUser.get().is_virtual);
@@ -18454,7 +18455,8 @@ var BinarySocket = new BinarySocketClass();
         var $accordion = findInSection(accType, '.accordion');
         if(/financial|volatility/.test(accType)) {
             findInSection(accType, '.authenticate').addClass(hiddenClass);
-            if(page.client.is_virtual()) {
+            var client_currency = page.client.get_storage_value('currency');
+            if(page.client.is_virtual() || (client_currency && client_currency !== 'USD')) {
                 $accordion.addClass(hiddenClass);
                 findInSection(accType, '.msg-switch-to-deposit').removeClass(hiddenClass);
             } else {
