@@ -146,6 +146,7 @@ Client.prototype = {
     },
     response_authorize: function(response) {
         page.client.set_storage_value('session_start', parseInt(moment().valueOf() / 1000));
+        page.client.set_storage_value('currency', response.authorize.currency);
         TUser.set(response.authorize);
         if(!Cookies.get('email')) this.set_cookie('email', response.authorize.email);
         this.set_storage_value('is_virtual', TUser.get().is_virtual);

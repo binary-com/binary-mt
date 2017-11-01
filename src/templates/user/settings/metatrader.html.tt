@@ -71,7 +71,7 @@
                 </div>
                 <form class="form-new-account invisible"></form>
                 <div class="account-details"></div>
-                <p class="msg-switch-to-deposit notice-msg center-text invisible">[% l('To deposit or withdraw from your MT5 Account, switch to your Binary.com Real Account.') %]</p>
+                <p class="msg-switch-to-deposit notice-msg center-text invisible">[% l('To deposit or withdraw from your MT5 Account, switch to your Binary.com USD Real Account.') %]</p>
                 <div class="accordion invisible">
                     <h3>[% l('Make a deposit') %]</h3>
                     <div>

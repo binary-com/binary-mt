@@ -109,7 +109,8 @@ var MetaTraderUI = (function() {
         var $accordion = findInSection(accType, '.accordion');
         if(/financial|volatility/.test(accType)) {
             findInSection(accType, '.authenticate').addClass(hiddenClass);
-            if(page.client.is_virtual()) {
+            var client_currency = page.client.get_storage_value('currency');
+            if(page.client.is_virtual() || (client_currency && client_currency !== 'USD')) {
                 $accordion.addClass(hiddenClass);
                 findInSection(accType, '.msg-switch-to-deposit').removeClass(hiddenClass);
             } else {
